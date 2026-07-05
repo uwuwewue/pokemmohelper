@@ -1,0 +1,43 @@
+// Fonts
+@import url('https://fonts.bunny.net/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import 'bootstrap/scss/bootstrap';
+
+
+.bg-poke-dark {
+    background-color: #2C2F33 !important;
+}
+.bg-poke-header {
+    background-color: #23272A !important;
+}
+
+.text-poke-gold {
+    color: #F1C40F !important;
+}
+
+.text-poke-light {
+    color: #E0E0E0 !important;
+}
+
+.nav-link.text-poke-light:hover {
+    color: #FFFFFF !important;
+    text-shadow: 0px 0px 5px rgba(255,255,255,0.5);
+}
+
+.text-poke-muted {
+    color: #B9BBBE !important;
+}
+
+.btn-poke-primary {
+    background-color: #5865F2;
+    color: white;
+    border: none;
+}
+.btn-poke-primary:hover {
+    background-color: #4752C4;
+    color: white;
+}
