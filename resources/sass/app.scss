@@ -41,3 +41,16 @@
     background-color: #4752C4;
     color: white;
 }
+
+.form-control-poke {
+    background-color: #23272A !important;
+    border: 1px solid #4F545C !important;
+    color: #FFFFFF !important;
+}
+
+.form-control-poke:focus {
+    background-color: #2C2F33 !important;
+    border-color: #F1C40F !important;
+    box-shadow: 0 0 0 0.25rem rgba(241, 196, 15, 0.25) !important;
+    color: white !important;
+}
