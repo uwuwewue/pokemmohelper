@@ -10,8 +10,14 @@
             </p>
             
             <div class="mt-5">
-                <a href="{{ route('login') }}" class="btn btn-outline-light btn-lg px-4">Login</a>
-                <a href="{{ route('register') }}" class="btn btn-warning btn-lg px-4 me-md-3 fw-bold">Register</a>
+                @guest
+                    <a href="{{ route('login') }}" class="btn btn-outline-light btn-lg px-4">Login</a>
+                    <a href="{{ route('register') }}" class="btn btn-warning btn-lg px-4 me-md-3 fw-bold">Register</a>
+                @endguest
+                
+                @auth
+                    <a href="{{ route('home') }}" class="btn btn-warning text-dark fw-bold px-4 py-2">Go to Dashboard</a>
+                @endauth        
             </div>
 
             <!-- Features -->

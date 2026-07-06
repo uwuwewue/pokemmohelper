@@ -29,8 +29,19 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
-
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item">
+                            <a class="nav-link text-poke-light fw-bold" href="#">Pokedex</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-poke-light fw-bold" href="#">Strategy Guides</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-poke-light fw-bold" href="#">Community</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-poke-light fw-bold" href="#">Recruitment</a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -54,7 +65,7 @@
                                     {{ Auth::user()->username }}
                                 </a>
 
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <div class="dropdown-menu dropdown-menu-end dropdown-menu-dark" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
