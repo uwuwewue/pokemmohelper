@@ -4,7 +4,13 @@
     <div class="container mt-5">
         <div class="border border-bottom-0 p-5 bg-dark rounded-top d-flex align-items-center justify-content-between">
             <div class="d-flex align-items-center gap-4">
-                <div class="bg-secondary rounded-circle" style="width: 100px; height: 100px"></div>
+                @if ($user->avatar)
+                    <img src="{{ asset('storage/' . $user->avatar) }}" alt="{{ $user->username }} avatar" class="rounded-circle border border-warning shadow" style="width: 100px; height: 100px; object-fit: cover;">
+                @else
+                    <div class="rounded-circle border border-warning shadow d-flex align-items-center justify-content-center bg-poke-dark text-poke-gold" style="width: 100px; height: 100px; font-size: 2.5rem; font-weight: bold;">
+                        {{ strtoupper(substr($user->username, 0, 1)) }}
+                    </div>
+                @endif
                 <h2 class="text-white m-0">{{ $user->username }}</h2>                
             </div>
             

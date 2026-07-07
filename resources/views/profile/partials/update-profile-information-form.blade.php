@@ -9,11 +9,11 @@
         </p>
     </header>
 
-    <form id="send-verification" method="post" action="{{ route('verification.send') }}">
+    <form id="send-verification" method="post" action="{{ route('verification.send') }}" enctype="multipart/form-data">
         @csrf
     </form>
 
-    <form method="post" action="{{ route('profile.update') }}">
+    <form method="post" action="{{ route('profile.update') }} " enctype="multipart/form-data">
         @csrf
         @method('patch')
 
@@ -29,6 +29,19 @@
             <label for="description" class="form-label text-poke-light">{{ __('Description') }}</label>
             <textarea id="description" name="description" class="form-control form-control-poke bg-dark text-poke-light" rows="4">{{ old('description', $user->description) }}</textarea>
             @error('description')
+                <div class="text-danger small mt-1">{{ $message }}</div>
+            @enderror
+        </div>
+
+        <div class="mb-3">
+            <label for="avatar" class="form-label text-poke-light">{{ __('Avatar') }}</label>
+            @if ($user->avatar)
+                <div class="mb-3">
+                    <img src="{{ asset('storage/' . $user->avatar) }}" alt="Current Avatar" class="rounded-circle border border-warning" style="width: 100px; height: 100px; object-fit: cover;">
+                </div>
+            @endif
+            <input type="file" id="avatar" name="avatar" class="form-control form-control-poke" accept="image/*">
+            @error('avatar')
                 <div class="text-danger small mt-1">{{ $message }}</div>
             @enderror
         </div>
