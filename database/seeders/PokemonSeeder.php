@@ -2,25 +2,40 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Pokemon;
+use Illuminate\Support\Facades\Http;
 
 class PokemonSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-        $pokemons = [
-            ['pokedex_number' => 1, 'name' => 'Bulbasaur', 'type_1' => 'Grass', 'type_2' => 'Poison', 'image_url' => 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png'],
-            ['pokedex_number' => 4, 'name' => 'Charmander', 'type_1' => 'Fire', 'type_2' => null, 'image_url' => 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png'],
-            ['pokedex_number' => 7, 'name' => 'Squirtle', 'type_1' => 'Water', 'type_2' => null, 'image_url' => 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png'],
-            ['pokedex_number' => 25, 'name' => 'Pikachu', 'type_1' => 'Electric', 'type_2' => null, 'image_url' => 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png'],
-        ];
+        $this->command->info('Odpalam maszynę losującą... Pobieram 649 Pokemonów. Zrób sobie herbatę, to potrwa ok. 1-2 minuty!');
 
-        foreach ($pokemons as $pokemon) {
-            \App\Models\Pokemon::create($pokemon);
+        for ($i = 1; $i <= 649; $i++) {
+            
+            $response = Http::retry(3, 1000)->get("https://pokeapi.co/api/v2/pokemon/{$i}");
+
+            if ($response->successful()) {
+                $data = $response->json();
+
+                $name = ucfirst($data['name']);
+                $type1 = ucfirst($data['types'][0]['type']['name']);
+                $type2 = isset($data['types'][1]) ? ucfirst($data['types'][1]['type']['name']) : null;
+                $imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{$i}.png";
+
+                Pokemon::updateOrCreate(
+                    ['pokedex_number' => $i], 
+                    [                         
+                        'name' => $name,
+                        'type_1' => $type1,
+                        'type_2' => $type2,
+                        'image_url' => $imageUrl
+                    ]
+                );
+            }
         }
+
+        $this->command->info('BOOM! Pokedex loaded!');
     }
 }

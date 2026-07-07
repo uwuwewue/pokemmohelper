@@ -9,6 +9,18 @@
         </div>
     </div>
 
+    <div class="row mb-5 justify-content-center">
+        <div class="col-md-6">
+            <form action="{{ route('pokedex') }}" method="GET" class="d-flex shadow-sm">
+                <input type="text" name="search" value="{{ request('search') }}" class="form-control bg-dark text-white border-warning me-2" placeholder="Enter pokemon name or pokedex number...">
+                <button type="submit" class="btn btn-warning">Search</button>
+                @if (request('search'))
+                    <a href="{{ route('pokedex') }}" class="btn btn-outline-danger ms-2">Clear</a>
+                @endif
+            </form>
+        </div>
+    </div>
+    
     <div class="row">
        @foreach ($pokemons as $pokemon)
             <div class="col-md-2 mb-4">
@@ -21,6 +33,8 @@
                         <img src="{{ $pokemon->image_url }}" alt="{{ $pokemon->name }} image">
                     </div>
                 </div>
+
+                >
 
                 <div class="modal fade" id="pokemonModal-{{ $pokemon->id }}" tabindex="-1">
                     <div class="modal-dialog modal-dialog-centered">
@@ -40,8 +54,16 @@
                                 
                                 <hr class="border-secondary">
                                 
-                                <p>sssssssssssss</p>
-                                
+                                <div class="d-flex justify-content-center gap-4">
+                                    <span class="badge rounded-pill text-black px-4 py-2 shadow-sm" style="background-color: {{ $typeColors[$pokemon->type_1] ?? $typeColors['Default'] }}; font-size: 0.9rem">
+                                        {{ $pokemon->type_1 }}
+                                    </span>
+                                    @if ($pokemon->type_2)
+                                        <span class="badge rounded-pill text-black px-4 py-2 shadow-sm" style="background-color: {{ $typeColors[$pokemon->type_2] ?? $typeColors['Default'] }}; font-size: 0.9rem">
+                                            {{ $pokemon->type_2 }}
+                                        </span>
+                                    @endif
+                                </div>
                             </div>
                             
                             <div class="modal-footer border-secondary justify-content-center">

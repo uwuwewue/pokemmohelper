@@ -31,7 +31,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mx-auto">
                         <li class="nav-item">
-                            <a class="nav-link text-poke-light fw-bold" href="#">Pokedex</a>
+                            <a class="nav-link text-poke-light fw-bold" href="{{ route('pokedex') }}">Pokedex</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-poke-light fw-bold" href="#">Strategy Guides</a>
