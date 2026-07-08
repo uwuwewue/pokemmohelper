@@ -58,3 +58,48 @@
 .form-control.bg-dark::placeholder {
     color: rgba(255, 255, 255, 0.6) !important;
 }
+
+.form-control-poke::placeholder {
+    color: rgba(255, 255, 255, 0.4) !important;
+    opacity: 1; 
+}
+
+/* Customowy Dropdown na Pokemony */
+.custom-dropdown-list {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    max-height: 250px;
+    overflow-y: auto;
+    background-color: #212529; /* Ciemne tło */
+    border: 1px solid #ffc107; /* Złota ramka */
+    border-top: none;
+    border-radius: 0 0 0.375rem 0.375rem;
+    z-index: 1050;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+}
+
+.custom-dropdown-list::-webkit-scrollbar {
+    width: 8px;
+}
+.custom-dropdown-list::-webkit-scrollbar-track {
+    background: #212529;
+}
+.custom-dropdown-list::-webkit-scrollbar-thumb {
+    background: #ffc107;
+    border-radius: 4px;
+}
+
+.dropdown-item-poke {
+    padding: 10px 15px;
+    color: #f8f9fa;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.dropdown-item-poke:hover {
+    background-color: #ffc107; /* Złote tło po najechaniu */
+    color: #212529; /* Ciemny tekst po najechaniu */
+    font-weight: bold;
+}

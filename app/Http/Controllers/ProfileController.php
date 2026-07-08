@@ -15,8 +15,9 @@ class ProfileController extends Controller
     public function show(string $username)
     {
         $user = User::query()->where('username', $username)->firstOrFail();
+        $userShinies = $user->shinies()->get();
 
-        return view('profile', compact('user'));
+        return view('profile', compact('user', 'userShinies'));
     }
 
     /**

@@ -4,6 +4,8 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PokemonController;
+use App\Http\Controllers\UserShinyController;
+use App\Models\UserShiny;
 use Symfony\Component\HttpKernel\Profiler\Profile;
 
 Route::get('/', function () {
@@ -22,6 +24,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile/edit', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/pokedex', [PokemonController::class, 'index'])->name('pokedex');
     Route::post('/pokedex/{pokemon}/toggle', [PokemonController::class, 'toggleCatch'])->name('pokedex.toggle');
+    Route::get('/shiny/create', [UserShinyController::class, 'create'])->name('shiny.create');
+    Route::post('/shiny/store', [UserShinyController::class, 'store'])->name('shiny.store');
 });
 
 require __DIR__.'/auth.php';

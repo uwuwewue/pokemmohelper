@@ -52,4 +52,9 @@ class User extends Authenticatable
     public function pokemons(){
         return $this->belongsToMany(Pokemon::class);
     }
+
+    public function shinies()
+    {
+        return $this->hasMany(UserShiny::class);
+    }
 }
