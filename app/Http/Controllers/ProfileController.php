@@ -17,7 +17,16 @@ class ProfileController extends Controller
         $user = User::query()->where('username', $username)->firstOrFail();
         $userShinies = $user->shinies()->get();
 
-        return view('profile', compact('user', 'userShinies'));
+        $ivStats = [
+            'hp_iv' => 'HP IV',
+            'attack_iv' => 'Attack IV',
+            'defense_iv' => 'Defense IV',
+            'sp_attack_iv' => 'Sp. Attack IV',
+            'sp_defense_iv' => 'Sp. Defense IV',
+            'speed_iv' => 'Speed IV',
+        ];
+
+        return view('profile', compact('user', 'userShinies', 'ivStats'));
     }
 
     /**

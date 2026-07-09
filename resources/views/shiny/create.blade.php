@@ -28,8 +28,11 @@
                                     <div id="custom_pokemon_list" class="custom-dropdown-list d-none"></div>
                                 </div>
                                 
-                                <label for="nature" class="form-label text-poke-light mt-3">Nature</label>
-                                <input type="text" class="form-control form-control-poke" id="nature" name="nature" placeholder="Adamant">
+                                <div class="position-relative">
+                                    <label for="nature" class="form-label text-poke-light">Nature</label>
+                                    <input type="text" class="form-control form-control-poke" id="nature" name="nature" placeholder="np. Adamant" autocomplete="off">
+                                    <div id="custom_nature_list" class="custom-dropdown-list d-none"></div>
+                                </div>
 
                                 <label for="hp_iv" class="form-label text-poke-light mt-3">HP IV</label>
                                 <input type="number" class="form-control form-control-poke" id="hp_iv" name="hp_iv" placeholder="0-31" min="0" max="31">

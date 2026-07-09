@@ -14,4 +14,17 @@ class UserShiny extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function getIvColor($value)
+    {
+        if ($value === 31) {
+            return 'text-success';
+        } 
+        elseif ($value === 0){
+            return 'text-danger';
+        } 
+        else {
+            return 'text-poke-light';
+        }
+    }
 }

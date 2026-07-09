@@ -22,10 +22,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.error('Błąd pobierania bazy z PokeAPI:', error);
     }
 
-    // Funkcja do rysowania listy
     const renderDropdown = (filterText = '') => {
         dropdown.innerHTML = ''; 
-        // Szukamy Pokemonów, które ZACZYNAJĄ SIĘ od wpisanych liter
+        
         const filtered = pokemonList.filter(p => p.name.toLowerCase().startsWith(filterText));
         
         if (filtered.length === 0 || filterText === '') {
@@ -35,24 +34,21 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         dropdown.classList.remove('d-none');
 
-        // Renderujemy tylko max 50 wyników na raz, żeby przeglądarka nie zwalniała
         filtered.slice(0, 50).forEach(poke => {
             const item = document.createElement('div');
             item.className = 'dropdown-item-poke';
             item.textContent = poke.name;
             
-            // Co się dzieje po kliknięciu na liście?
             item.addEventListener('click', () => {
-                input.value = poke.name; // Wpisujemy nazwę do inputa
-                dropdown.classList.add('d-none'); // Ukrywamy listę
-                sprite.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/${poke.id}.png`; // Ładujemy obrazek
+                input.value = poke.name; 
+                dropdown.classList.add('d-none'); 
+                sprite.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/${poke.id}.png`; 
             });
             
             dropdown.appendChild(item);
         });
     };
 
-    // Nasłuchiwanie wpisywania
     input.addEventListener('input', (e) => {
         const typedName = e.target.value.toLowerCase();
         renderDropdown(typedName);
@@ -64,10 +60,62 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     });
 
-    // Ukrywanie listy, jak gracz kliknie gdzieś indziej na stronie
+    const natureInput = document.getElementById('nature');
+    const natureDropdown = document.getElementById('custom_nature_list');
+    
+    const natureList = [
+        'Adamant', 'Bashful', 'Bold', 'Brave', 'Calm', 
+        'Careful', 'Docile', 'Gentle', 'Hardy', 'Hasty', 
+        'Impish', 'Jolly', 'Lax', 'Lonely', 'Mild', 
+        'Modest', 'Naive', 'Naughty', 'Quiet', 'Quirky', 
+        'Rash', 'Relaxed', 'Sassy', 'Serious', 'Timid'
+    ];
+
+    const renderNatureDropdown = (filterText = '') => {
+        if (!natureDropdown) return;
+        
+        natureDropdown.innerHTML = ''; 
+        
+        const filtered = natureList.filter(n => n.toLowerCase().startsWith(filterText));
+        
+        if (filtered.length === 0) {
+            natureDropdown.classList.add('d-none');
+            return;
+        }
+
+        natureDropdown.classList.remove('d-none');
+
+        filtered.forEach(nature => {
+            const item = document.createElement('div');
+            item.className = 'dropdown-item-poke'; 
+            item.textContent = nature;
+            
+            item.addEventListener('click', () => {
+                natureInput.value = nature;
+                natureDropdown.classList.add('d-none');
+            });
+            
+            natureDropdown.appendChild(item);
+        });
+    };
+
+    if (natureInput) {
+        natureInput.addEventListener('input', (e) => {
+            renderNatureDropdown(e.target.value.toLowerCase());
+        });
+
+        natureInput.addEventListener('focus', (e) => {
+            renderNatureDropdown(e.target.value.toLowerCase());
+        });
+    }
+
     document.addEventListener('click', (e) => {
-        if (!input.contains(e.target) && !dropdown.contains(e.target)) {
+        if (input && dropdown && !input.contains(e.target) && !dropdown.contains(e.target)) {
             dropdown.classList.add('d-none');
         }
+        if (natureInput && natureDropdown && !natureInput.contains(e.target) && !natureDropdown.contains(e.target)) {
+            natureDropdown.classList.add('d-none');
+        }
     });
+
 });
