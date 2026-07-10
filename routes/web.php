@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommunityController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -17,6 +18,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/user/{username}', [ProfileController::class, 'show'])->name('profile.show');
+Route::get('/community', [CommunityController::class, 'index'])->name('community.index');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -26,6 +28,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/pokedex/{pokemon}/toggle', [PokemonController::class, 'toggleCatch'])->name('pokedex.toggle');
     Route::get('/shiny/create', [UserShinyController::class, 'create'])->name('shiny.create');
     Route::post('/shiny/store', [UserShinyController::class, 'store'])->name('shiny.store');
+    Route::post('/community', [CommunityController::class, 'store'])->name('community.store');
+    Route::delete('/community/{post}', [CommunityController::class, 'destroy'])->name('community.destroy');
 });
 
 require __DIR__.'/auth.php';

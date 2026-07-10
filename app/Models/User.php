@@ -57,4 +57,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(UserShiny::class);
     }
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
 }
