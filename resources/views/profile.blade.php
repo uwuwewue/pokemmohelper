@@ -107,6 +107,5 @@
                 <h2>s</h2>
             </div>
         </div>
-    
     </div>
 @endsection

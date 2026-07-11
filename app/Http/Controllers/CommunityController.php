@@ -37,6 +37,32 @@ class CommunityController extends Controller
         return back();
     }
 
+    public function update(Request $request, Post $post)
+    {
+        if (Auth::id() !== $post->user_id){
+            abort(403, "You dont have permission to edit this post.");
+        }
+
+        $request->validate([
+            'content' => 'required|string|max:1000',
+            'image_path' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        $dataToUpdate = [
+            'content' => $request->input('content'),
+        ];
+
+        if ($request->hasFile('image')){
+            if ($post->image_path){
+                Storage::disk('public')->delete($post->image_path);
+            }
+            $dataToUpdate['image_path'] = $request->file('image')->store('posts', 'public');
+        }
+        $post->update($dataToUpdate);
+
+        return back();
+    }
+
     public function destroy(Post $post)
     {
         if (Auth::id() !== $post->user_id){

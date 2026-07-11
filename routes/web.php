@@ -29,6 +29,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/shiny/create', [UserShinyController::class, 'create'])->name('shiny.create');
     Route::post('/shiny/store', [UserShinyController::class, 'store'])->name('shiny.store');
     Route::post('/community', [CommunityController::class, 'store'])->name('community.store');
+    Route::put('/community/{post}', [CommunityController::class, 'update'])->name('community.update');
     Route::delete('/community/{post}', [CommunityController::class, 'destroy'])->name('community.destroy');
 });
 

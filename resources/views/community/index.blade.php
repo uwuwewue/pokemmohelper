@@ -42,16 +42,31 @@
                                     <h5 class="mb-0">{{ $post->user->username }}</h5>
                                 </div>
                                 <div class="text-end">
-                                    <span class="small">{{ $post->created_at->diffForHumans() }}</span>
                                     @auth
                                         @if (Auth::id() === $post->user_id)
-                                            <form action="{{ route('community.destroy', $post->id) }}" method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger">Delete</button>
-                                            </form>
+                                            <div class="dropdown">
+                                            <button class="btn btn-link text-poke-light p-0 fs-4 lh-1 border-0" type="button" id="dropdownMenuButton-{{ $post->id }}" data-bs-toggle="dropdown" aria-expanded="false" style="text-decoration: none;">
+                                                ...
+                                            </button>
+                                            <ul class="dropdown-menu dropdown-menu-end bg-dark text-poke-light text-center border-warning">
+                                                <li>
+                                                    <form action="{{ route('community.destroy', $post->id) }}" method="POST" class="delete-post-form">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button class="dropdown-item btn bg-transparent text-poke-light mt-2">Delete</button>
+                                                    </form>
+                                                </li>
+                                                <hr class="border border-secondary">
+                                                <li>
+                                                    <button type="button" class="dropdown-item btn bg-transparent text-poke-light mb-2" data-bs-toggle="modal" data-bs-target="#editModal-{{ $post->id }}">
+                                                        Edit
+                                                    </button>
+                                                </li>
+                                            </ul>
+                                        </div>
                                         @endif
                                     @endauth
+                                    <span class="small">{{ $post->created_at->diffForHumans() }}</span>                                  
                                 </div>
                             </div>
                             <hr class="border border-secondary">
@@ -62,6 +77,41 @@
                                     <img src="{{ asset('storage/' . $post->image_path) }}" alt="Post image" class="img-fluid rounded border border-secondary" style="max-height: 250px; width: 250px; object-fit: cover;">
                                 </div>
                             @endif
+                        </div>
+                    </div>
+                    <div class="modal fade" id="editModal-{{ $post->id }}" tabindex="-1" aria-labelledby="editModalLabel-{{ $post->id }}" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content bg-dark text-poke-light border-warning">
+                                <div class="modal-header border-secondary">
+                                    <h5 class="modal-title fw-bold" id="editModalLabel-{{ $post->id }}">Edit Post</h5>
+                                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                
+                                <form action="{{ route('community.update', $post->id) }}" method="POST" enctype="multipart/form-data">
+                                    @csrf
+                                    @method('PUT') 
+                                    
+                                    <div class="modal-body">
+                                        <div class="mb-3">
+                                            <label class="form-label text-poke-light small">Post content</label>
+                                            <textarea class="form-control text-light" style="background-color: #2b2b2b; border-color: #444;" name="content" rows="4" required>{{ $post->content }}</textarea>
+                                        </div>
+                                        
+                                        <div class="mb-3">
+                                            <label class="form-label text-poke-light small">Change image (optional)</label>
+                                            <input class="form-control bg-dark text-light border-secondary" type="file" name="image" accept="image/*">
+                                            @if($post->image_path)
+                                                <small class="text-muted d-block mt-1">Note: Uploading a new image will replace the current one.</small>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="modal-footer border-secondary">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                        <button type="submit" class="btn btn-warning fw-bold text-dark">Save changes</button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 @endforeach
