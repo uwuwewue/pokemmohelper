@@ -121,3 +121,32 @@
         }
     }
 }
+
+.dark-pagination {
+    nav p,
+    nav div,
+    .text-muted {
+        color: #e0e0e0 !important;
+    }
+
+    .page-item {
+        &.active .page-link {
+            background-color: #ffc107 !important;
+            border-color: #ffc107 !important;
+            color: #212529 !important;
+            font-weight: bold;
+        }
+    }
+
+    .page-link {
+        background-color: #212529 !important;
+        border-color: #444 !important;
+        color: #ffc107 !important;
+
+        // Efekt po najechaniu myszką
+        &:hover {
+            background-color: #333 !important;
+            color: #fff !important;
+        }
+    }
+}

@@ -11,7 +11,7 @@ class CommunityController extends Controller
 {
     public function index()
     {
-        $posts = Post::with('user')->latest()->get();
+        $posts = Post::with('user')->latest()->paginate(5);
 
         return view('community.index', compact('posts'));
     }

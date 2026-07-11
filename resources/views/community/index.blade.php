@@ -70,7 +70,7 @@
                                 </div>
                             </div>
                             <hr class="border border-secondary">
-                            <p class="card-text">{{ $post->content }}</p>
+                            <p class="card-text">{!! nl2br(e($post->content)) !!}</p>
                             <hr class="border border-secondary">
                             @if ($post->image_path)
                                 <div class="mt-3">
@@ -115,6 +115,9 @@
                         </div>
                     </div>
                 @endforeach
+                <div class="d-flex justify-content-center my-4 dark-pagination">
+                    {{ $posts->links() }}
+                </div>
                 @if ($posts->isEmpty())
                     <div class="border border-danger text-center bg-light p-4">
                         <h6 class="fw-bold">No posts yet. Be the first one to post!</h6>
