@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+@vite(['resources/js/pokedex.js'])
 <div class="container mt-4">
     <div class="row mb-3">
         <div class="col-12">
@@ -11,8 +12,11 @@
 
     <div class="row mb-5 justify-content-center">
         <div class="col-md-6">
-            <form action="{{ route('pokedex') }}" method="GET" class="d-flex shadow-sm">
-                <input type="text" name="search" value="{{ request('search') }}" class="form-control bg-dark text-white border-warning me-2" placeholder="Enter pokemon name or pokedex number...">
+            <form action="{{ route('pokedex') }}" method="GET" id="pokedex_search_form" class="d-flex shadow-sm">
+                <div class="position-relative w-100 me-2">
+                    <input type="text" name="search" id="pokedex_search_input"value="{{ request('search') }}" class="form-control form-control-poke" placeholder="Enter pokemon name or pokedex number..." autocomplete="off">
+                    <div id="pokedex_dropdown_list" class="custom-dropdown-list d-none"></div>
+                </div>
                 <button type="submit" class="btn btn-warning">Search</button>
                 @if (request('search'))
                     <a href="{{ route('pokedex') }}" class="btn btn-outline-danger ms-2">Clear</a>
@@ -84,4 +88,5 @@
         @endforeach
     </div>
 </div>
+@vite(['resources/js/pokedex.js'])
 @endsection

@@ -24,7 +24,7 @@
                                 <hr class="border-secondary my-3">
                                 <label for="pokemon_name" class="form-label text-poke-light">Pokemon</label>
                                 <div class="position-relative">
-                                    <input type="text" class="form-control form-control-poke" id="pokemon_name" name="pokemon_name" required placeholder="np. Bulbasaur" autocomplete="off">
+                                    <input type="text" class="form-control form-control-poke" id="pokemon_name" name="pokemon_name" required placeholder="Bulbasaur" autocomplete="off">
                                     <div id="custom_pokemon_list" class="custom-dropdown-list d-none"></div>
                                 </div>
                                 
