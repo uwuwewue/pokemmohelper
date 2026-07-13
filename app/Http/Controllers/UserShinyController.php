@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\UserShiny;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
 
 class UserShinyController extends Controller
 {
@@ -36,5 +38,40 @@ class UserShinyController extends Controller
         $request->user()->shinies()->create($validated);
 
         return redirect()->route('profile.show', $request->user()->username);
+    }
+
+    public function edit(string $id)
+    {
+        $shiny = UserShiny::findOrFail($id);
+
+        if ($shiny->user_id !== Auth::id()){
+            abort(403, 'You cant edit someones else pokemon!');
+        }
+
+        return view('shiny.edit', compact('shiny'));
+    }
+
+    public function update(Request $request, string $id)
+    {
+        $shiny = UserShiny::findOrFail($id);
+
+        if ($shiny->user_id !== Auth::id()){
+            abort(403, 'Unauthorized action.');
+        }
+
+        $shiny->update([
+            'pokemon_name' => $request->input('pokemon_name'),
+            'nature'  => $request->input('nature'),
+            'hp_iv' => $request->input('hp_iv'),
+            'attack_iv' => $request->input('attack_iv'),
+            'defense_iv' => $request->input('defense_iv'),
+            'sp_attack_iv' => $request->input('sp_attack_iv'),
+            'sp_defense_iv' => $request->input('sp_defense_iv'),
+            'speed_iv' => $request->input('speed_iv'),
+            'encounters' => $request->input('encounters'),
+            'catch_date' => $request->input('catch_date'),
+        ]);
+
+        return redirect()->to(route('profile.show', Auth::user()->username) . '#shinyshowcase')->with('success', 'Shiny updated!');
     }
 }

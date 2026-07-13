@@ -28,6 +28,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/pokedex/{pokemon}/toggle', [PokemonController::class, 'toggleCatch'])->name('pokedex.toggle');
     Route::get('/shiny/create', [UserShinyController::class, 'create'])->name('shiny.create');
     Route::post('/shiny/store', [UserShinyController::class, 'store'])->name('shiny.store');
+    Route::get('/shiny/{id}/edit', [UserShinyController::class, 'edit'])->name('shiny.edit');
+    Route::put('/shiny/{id}', [UserShinyController::class, 'update'])->name('shiny.update');
     Route::post('/community', [CommunityController::class, 'store'])->name('community.store');
     Route::put('/community/{post}', [CommunityController::class, 'update'])->name('community.update');
     Route::delete('/community/{post}', [CommunityController::class, 'destroy'])->name('community.destroy');

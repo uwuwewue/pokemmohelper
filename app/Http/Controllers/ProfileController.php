@@ -26,7 +26,9 @@ class ProfileController extends Controller
             'speed_iv' => 'Speed IV',
         ];
 
-        return view('profile', compact('user', 'userShinies', 'ivStats'));
+        $posts = $user->posts()->latest()->paginate(5);
+
+        return view('profile', compact('user', 'userShinies', 'ivStats', 'posts'));
     }
 
     /**

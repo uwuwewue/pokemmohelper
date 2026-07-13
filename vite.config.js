@@ -9,6 +9,7 @@ export default defineConfig({
                 'resources/js/app.js',
                 'resources/js/shiny-create.js',
                 'resources/js/pokedex.js',
+                'resources/js/profile.js',
             ],
             refresh: true,
         }),
