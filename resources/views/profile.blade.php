@@ -108,12 +108,18 @@
                                     </div>
                                 </div>
                                 <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary fw-bold shadow-sm" data-bs-dismiss="modal">Close</button>
                                     @auth
                                         @if (Auth::id() ===$user->id)
                                             <a href="{{ route('shiny.edit', $shiny->id) }}" class="btn btn-primary shadow-sm fw-bold">Edit</a>
+                                            <form action="{{ route('shiny.destroy', $shiny->id) }}" method="POST" class="delete-shiny-form">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger shadow-sm fw-bold">Release</button>
+                                            </form>
                                         @endif
                                     @endauth
-                                    <button type="button" class="btn btn-danger fw-bold shadow-sm" data-bs-dismiss="modal">Close</button>
+                                    
                                 </div>
                                 </div>
                             </div>

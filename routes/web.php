@@ -30,6 +30,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/shiny/store', [UserShinyController::class, 'store'])->name('shiny.store');
     Route::get('/shiny/{id}/edit', [UserShinyController::class, 'edit'])->name('shiny.edit');
     Route::put('/shiny/{id}', [UserShinyController::class, 'update'])->name('shiny.update');
+    Route::delete('/shiny/{id}', [UserShinyController::class, 'destroy'])->name('shiny.destroy');
     Route::post('/community', [CommunityController::class, 'store'])->name('community.store');
     Route::put('/community/{post}', [CommunityController::class, 'update'])->name('community.update');
     Route::delete('/community/{post}', [CommunityController::class, 'destroy'])->name('community.destroy');

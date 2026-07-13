@@ -5,7 +5,7 @@
         <div class="row justify-content-center text-center">
             <div class="col-md-8">
                 <div class="border rounded border-warning p-4 bg-poke-dark shadow">
-                    <h2 class="text-poke-gold mb-4">Add your new Shiny</h2>
+                    <h2 class="text-poke-gold mb-4">Edit your Shiny</h2>
                     <hr class="border-secondary my-4">
                     
                     <form method="POST" action="{{ route('shiny.update', $shiny->id)  }}">
@@ -15,8 +15,11 @@
                             <div class="col-md-6">
                                 <h4 class="fw-bold text-poke-light mb-3">Sprite</h4>
                                 <hr class="border-secondary my-3">
-                                <div class="d-flex justify-content-center align-items-center mt-5">
-                                    <img id="pokemon-sprite" src="https://img.pokemondb.net/sprites/black-white/shiny/{{ Str::lower($shiny->pokemon_name) }}.png" alt="Shiny {{ $shiny->pokemon_name }}">
+                                <div class="d-flex justify-content-center align-items-center flex-grow-1">
+                                    <img id="pokemon_sprite" 
+                                        src="https://img.pokemondb.net/sprites/black-white/shiny/{{ Str::lower($shiny->pokemon_name) }}.png" 
+                                        alt="Shiny {{ $shiny->pokemon_name }}"
+                                        style="width: 150px; height: 150px; image-rendering: pixelated; object-fit: contain;">
                                 </div>
                             </div>
 
@@ -25,7 +28,7 @@
                                 <hr class="border-secondary my-3">
                                 <label for="pokemon_name" class="form-label text-poke-light">Pokemon</label>
                                 <div class="position-relative">
-                                    <input type="text" class="form-control form-control-poke" value="{{ $shiny->pokemon_name }}" readonly>
+                                    <input type="text" id="pokemon_name" name="pokemon_name" class="form-control form-control-poke" value="{{ $shiny->pokemon_name }}" readonly>
                                     <div id="custom_pokemon_list" class="custom-dropdown-list d-none"></div>
                                 </div>
                                 

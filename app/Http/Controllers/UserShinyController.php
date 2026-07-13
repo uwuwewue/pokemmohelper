@@ -55,12 +55,11 @@ class UserShinyController extends Controller
     {
         $shiny = UserShiny::findOrFail($id);
 
-        if ($shiny->user_id !== Auth::id()){
+        if (Auth::id() !== $shiny->user_id){
             abort(403, 'Unauthorized action.');
         }
 
         $shiny->update([
-            'pokemon_name' => $request->input('pokemon_name'),
             'nature'  => $request->input('nature'),
             'hp_iv' => $request->input('hp_iv'),
             'attack_iv' => $request->input('attack_iv'),
@@ -72,6 +71,19 @@ class UserShinyController extends Controller
             'catch_date' => $request->input('catch_date'),
         ]);
 
-        return redirect()->to(route('profile.show', Auth::user()->username) . '#shinyshowcase')->with('success', 'Shiny updated!');
+        return to_route('profile.show', Auth::user()->username)->withFragment('shinyshowcase')->with('success', 'Shiny updated!');
+    }
+
+    public function destroy(string $id)
+    {
+        $shiny = UserShiny::findOrFail($id);
+
+        if (Auth::id() !== $shiny->user_id){
+            abort(403, 'You cant delete someones else pokemon!');
+        }
+
+        $shiny->delete();
+
+        return to_route('profile.show', Auth::user()->username)->withFragment('shinyshowcase')->with('success', 'Shiny has been released!');
     }
 }
