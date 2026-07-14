@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CommunityController;
+use App\Http\Controllers\LikeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -34,6 +35,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/community', [CommunityController::class, 'store'])->name('community.store');
     Route::put('/community/{post}', [CommunityController::class, 'update'])->name('community.update');
     Route::delete('/community/{post}', [CommunityController::class, 'destroy'])->name('community.destroy');
+    Route::post('/post/{id}/like', [LikeController::class, 'toggle'])->name('post.like');
 });
 
 require __DIR__.'/auth.php';

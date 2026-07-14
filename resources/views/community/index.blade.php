@@ -29,7 +29,7 @@
             @endauth
             
                 <hr class="border border-secondary">
-                <h3 class="text-poke-gold fw-bold">Latest's Posts</h3>
+                <h3 class="text-poke-gold fw-bold">Latest Posts</h3>
                 @foreach ($posts as $post)
                     <div class="card mb-3 border-warning bg-dark text-poke-light rounded">
                         <div class="card-body">
@@ -66,7 +66,7 @@
                                         </div>
                                         @endif
                                     @endauth
-                                    <span class="small">{{ $post->created_at->diffForHumans() }}</span>                                  
+                                    <span class="small">{{ $post->created_at->diffForHumans() }}</span>                              
                                 </div>
                             </div>
                             <hr class="border border-secondary">
@@ -77,6 +77,12 @@
                                     <img src="{{ asset('storage/' . $post->image_path) }}" alt="Post image" class="img-fluid rounded border border-secondary" style="max-height: 250px; width: 250px; object-fit: cover;">
                                 </div>
                             @endif
+                        </div>
+                        <div class="card-footer bg-transparent border-secondary border-top d-flex justify-content-start py-2">
+                            <button class="btn btn-sm btn-outline-warning border-0 like-btn" data-id="{{ $post->id }}">
+                                <i class="fa-heart {{ Auth::check() && $post->isLikedBy(Auth::user()) ? 'fas text-danger' : 'far text-light' }} like-icon fs-5"></i> 
+                                <span class="likes-count fw-bold ms-1 fs-5 text-light">{{ $post->likes()->count() }}</span>
+                            </button>
                         </div>
                     </div>
                     <div class="modal fade" id="editModal-{{ $post->id }}" tabindex="-1" aria-labelledby="editModalLabel-{{ $post->id }}" aria-hidden="true">

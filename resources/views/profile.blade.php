@@ -178,6 +178,12 @@
                                 </div>
                             @endif
                         </div>
+                         <div class="card-footer bg-transparent border-secondary border-top d-flex justify-content-start py-2">
+                            <button class="btn btn-sm btn-outline-warning border-0 like-btn" data-id="{{ $post->id }}">
+                                <i class="fa-heart {{ Auth::check() && $post->isLikedBy(Auth::user()) ? 'fas text-danger' : 'far text-light' }} like-icon fs-5"></i> 
+                                <span class="likes-count fw-bold ms-1 fs-5 text-light">{{ $post->likes()->count() }}</span>
+                            </button>
+                        </div>
                     </div>
                     @endforeach
                     <div class="d-flex justify-content-center my-4 dark-pagination">
