@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CommunityController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\ProfileController;
@@ -7,7 +8,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PokemonController;
 use App\Http\Controllers\UserShinyController;
-use App\Models\UserShiny;
 use Symfony\Component\HttpKernel\Profiler\Profile;
 
 Route::get('/', function () {
@@ -36,6 +36,7 @@ Route::middleware('auth')->group(function () {
     Route::put('/community/{post}', [CommunityController::class, 'update'])->name('community.update');
     Route::delete('/community/{post}', [CommunityController::class, 'destroy'])->name('community.destroy');
     Route::post('/post/{id}/like', [LikeController::class, 'toggle'])->name('post.like');
+    Route::post('/post/{id}/comment', [CommentController::class, 'store'])->name('comment.store');
 });
 
 require __DIR__.'/auth.php';

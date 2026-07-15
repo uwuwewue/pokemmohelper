@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const input = document.getElementById('pokemon_name');
     const sprite = document.getElementById('pokemon_sprite');
     const dropdown = document.getElementById('custom_pokemon_list');
+    const dateInput = document.getElementById('catch_date');
     
     let pokemonList = [];
     let pokemonMap = {};
@@ -117,5 +118,23 @@ document.addEventListener('DOMContentLoaded', async () => {
             natureDropdown.classList.add('d-none');
         }
     });
+
+    if (dateInput) {
+        dateInput.addEventListener('input', (e) => {
+            const selectedDate = e.target.value;
+            const minDate = dateInput.getAttribute('min');
+            const maxDate = dateInput.getAttribute('max');
+
+            if (selectedDate) {
+                if (selectedDate < minDate || selectedDate > maxDate) {
+                    dateInput.classList.add('is-invalid');
+                } else {
+                    dateInput.classList.remove('is-invalid');
+                }
+            } else {
+                dateInput.classList.remove('is-invalid');
+            }
+        });
+    }
 
 });

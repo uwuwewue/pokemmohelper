@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     const deleteForms = document.querySelectorAll('.delete-post-form');
     const likeButtons = document.querySelectorAll('.like-btn');
+    const flashMessageEl = document.getElementById('flash-success-message');
 
     deleteForms.forEach(form => {
         form.addEventListener('submit', function (e) {
@@ -24,6 +25,21 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
     });
+
+    if (flashMessageEl) {
+        const message = flashMessageEl.getAttribute('data-message');
+        
+        Swal.fire({
+            title: 'Awesome!',
+            text: message,
+            icon: 'success',
+            confirmButtonColor: '#ffc107',
+            background: '#212529',
+            color: '#f8f9fa',
+            timer: 3000,
+            timerProgressBar: true
+        });
+    }
 
     likeButtons.forEach(button => {
         button.addEventListener('click', async function() {

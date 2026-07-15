@@ -32,7 +32,7 @@ class UserShinyController extends Controller
             'sp_defense_iv' => $ivRule,
             'speed_iv' => $ivRule,
             'encounters' => 'nullable|integer|between:0,1000000',
-            'catch_date' => 'nullable|date',
+            'catch_date' => 'nullable|date|after_or_equal:2012-01-01|before_or_equal:today',
         ]);
 
         $request->user()->shinies()->create($validated);

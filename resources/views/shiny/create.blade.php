@@ -58,7 +58,7 @@
                                 <input type="number" class="form-control form-control-poke" id="encounters" name="encounters" placeholder="12345" min="0" max="1000000">
 
                                 <label for="catch_date" class="form-label text-poke-light mt-3">Catch Date</label>
-                                <input type="date" class="form-control form-control-poke mb-3" id="catch_date" name="catch_date">
+                                <input type="date" class="form-control form-control-poke mb-3" id="catch_date" name="catch_date" min="2012-01-01" max="{{ date('Y-m-d') }}">
                             </div>
                        </div>
                        <hr class="border-secondary my-4">

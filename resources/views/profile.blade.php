@@ -170,7 +170,7 @@
                                 </div>
                             </div>
                             <hr class="border border-secondary">
-                            <p class="card-text">{!! nl2br(e($post->content)) !!}</p>
+                            <p class="text-start card-text">{!! nl2br(e($post->content)) !!}</p>
                             <hr class="border border-secondary">
                             @if ($post->image_path)
                                 <div class="mt-3">
@@ -183,6 +183,51 @@
                                 <i class="fa-heart {{ Auth::check() && $post->isLikedBy(Auth::user()) ? 'fas text-danger' : 'far text-light' }} like-icon fs-5"></i> 
                                 <span class="likes-count fw-bold ms-1 fs-5 text-light">{{ $post->likes()->count() }}</span>
                             </button>
+                            <button class="btn btn-sm btn-outline-warning border-0" data-bs-toggle="collapse" data-bs-target="#comments-collapse-{{ $post->id }}">
+                                <i class="far fa-comment text-light fs-5"></i>
+                                <span class="fw-bold ms-1 fs-5 text-poke-light">{{ $post->comments->count() }}</span>
+                            </button>
+                        </div>
+                        <div class="collapse" id="comments-collapse-{{ $post->id }}">
+                            @foreach ($post->comments as $comment)
+                                <div class="mb-3 p-2">
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <div class="d-flex align-items-center">
+                                            <img src="{{ $comment->user->avatar ? asset('storage/' . $comment->user->avatar) : 'https://ui-avatars.com/api/?name=' . $comment->user->username . '&background=2b2b2b&color=ffc107' }}" alt="Avatar" 
+                                            class="rounded-circle me-3 border border-secondary" style="width: 30px; height: 30x; object-fit: cover;">
+
+                                            <span class="fw-bold text-poke-light">{{ $comment->user->username }}</span>
+                                        </div>
+                                        <span class="small">{{ $comment->created_at->diffForHumans() }}</span>
+                                    </div>
+                                    <p class="text-start m-2 text-poke-light">{!! nl2br(e($comment->comment)) !!}</p>
+                                    @if ($comment->image_path)
+                                        <div class="m-2 text-start">
+                                            <img src="{{ asset('storage/' . $comment->image_path) }}" alt="Comment image" class="img-fluid rounded border border-secondary" style="max-height: 200px; object-fit: cover;">
+                                        </div>
+                                    @endif
+                                    <hr class="border-secondary">
+                                </div>
+                            @endforeach
+                            @if ($post->comments->isEmpty())
+                                <div class="border border-0 border-top border-warning text-center bg-light p-4 bg-transparent">
+                                    <h6 class="fw-bold">No comments yet. Be the first one to comment!</h6>
+                                </div>
+                            @endif
+                            @auth
+                                <form action="{{ route('comment.store', $post->id) }}" method="POST" enctype="multipart/form-data" class="mt-3">
+                                    @csrf
+                                    <textarea name="comment" id="comment" rows="2" placeholder="Your comment..." class="form-control form-control-poke border-secondary bg-transparent text-poke-light mb-2"></textarea>
+                                    <div class="d-flex justify-content-between align-items-center px-2 m-3">
+                                        <input type="file" name="image" accept="image/*" class="form-control form-control-sm bg-dark text-poke-light border-secondary w-50">
+                                        <button type="submit" class="btn btn-sm btn-warning fw-bold">Post Comment</button>
+                                    </div>
+                                </form>
+                            @else
+                            <div class="alert alert-primary shadow-sm m-3" role="alert">
+                                <p>You must be <a href="{{ route('login') }}" class="alert-link">logged in</a> to comment.</p>
+                            </div>
+                            @endauth
                         </div>
                     </div>
                     @endforeach
