@@ -41,7 +41,7 @@
                                         alt="Avatar" 
                                         class="rounded-circle me-3 border border-secondary" 
                                         style="width: 45px; height: 45px; object-fit: cover;">                                        
-                                    <h5 class="mb-0">{{ $post->user->username }}</h5>
+                                    <h5 class="mb-0"><a href="{{ route('profile.show', $post->user->username) }}" class="text-poke-light text-decoration-none">{{ $post->user->username }}</a></h5>
                                 </div>
                                 <div class="text-end">
                                     @auth
@@ -98,7 +98,7 @@
                                             <img src="{{ $comment->user->avatar ? asset('storage/' . $comment->user->avatar) : 'https://ui-avatars.com/api/?name=' . $comment->user->username . '&background=2b2b2b&color=ffc107' }}" alt="Avatar" 
                                             class="rounded-circle me-3 border border-secondary" style="width: 30px; height: 30x; object-fit: cover;">
 
-                                            <span class="fw-bold text-poke-light">{{ $comment->user->username }}</span>
+                                            <a href="{{ route('profile.show', $comment->user->username) }}" class="text-decoration-none text-poke-light">{{ $comment->user->username }}</a>
                                         </div>
                                         <span class="small">{{ $comment->created_at->diffForHumans() }}</span>
                                     </div>
