@@ -11,7 +11,29 @@
                         {{ strtoupper(substr($user->username, 0, 1)) }}
                     </div>
                 @endif
-                <h2 class="text-white m-0">{{ $user->username }}</h2>                
+                <h2 class="text-white m-0">{{ $user->username }}</h2>    
+                <div class="d-flex justify-content-center text-poke-light gap-4">
+                    <div>
+                    <span class="fw-bold fs-5 text-poke-light">{{ $user->followers->count() }}</span>
+                    <span class="text-poke-light">Followers</span>
+                </div>
+                <div>
+                    <span class="fw-bold fs-5 text-poke-light">{{ $user->following->count() }}</span>
+                    <span class="text-poke-light">Following</span>
+                </div>
+                </div>
+                @auth
+                    @if (Auth::id() !== $user->id)
+                        <form action="{{ route('user.follow', $user->id) }}" method="POST">
+                            @csrf
+                            @if (Auth::user()->isFollowing($user))
+                                <button type="submit" class="btn btn-sm btn-outline-danger fw-bold px-4">Unfollow</button>
+                            @else
+                            <button type="submit" class="btn btn-sm btn-warning fw-bold px-4">Follow</button>
+                            @endif
+                        </form>
+                    @endif
+                @endauth
             </div>
             
             @if (Auth::id() === $user->id)
