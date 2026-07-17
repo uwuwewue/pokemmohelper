@@ -8,6 +8,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PokemonController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\UserShinyController;
 use Symfony\Component\HttpKernel\Profiler\Profile;
 
@@ -21,6 +22,7 @@ Route::get('/dashboard', function () {
 
 Route::get('/user/{username}', [ProfileController::class, 'show'])->name('profile.show');
 Route::get('/community', [CommunityController::class, 'index'])->name('community.index');
+Route::get('/search/live', [SearchController::class, 'liveSearch'])->name('search.live');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');

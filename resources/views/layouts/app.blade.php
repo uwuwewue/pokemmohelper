@@ -47,6 +47,20 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
+                        <li class="nav-item me-3">
+                            <div class="position-relative" style="width: 250px;" id="live_search_container">
+                                <div class="input-group">
+                                    <input type="text" id="user_search_input" class="form-control border-secondary bg-dark text-light" placeholder="Search players..." autocomplete="off">
+                                    <span class="input-group-text bg-warning border-secondary text-dark">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search fw-bold" viewBox="0 0 16 16">
+                                          <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                                        </svg>
+                                    </span>
+                                </div>
+                                
+                                <div id="user_search_dropdown" class="dropdown-menu w-100 bg-dark border-secondary shadow-lg mt-1 position-absolute" style="top: 100%; left: 0; z-index: 1050;"></div>
+                            </div>
+                        </li>
                         <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))
