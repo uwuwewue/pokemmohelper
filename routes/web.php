@@ -5,6 +5,7 @@ use App\Http\Controllers\CommunityController;
 use App\Http\Controllers\FollowController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RecruitmentController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PokemonController;
@@ -41,6 +42,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/post/{id}/like', [LikeController::class, 'toggle'])->name('post.like');
     Route::post('/post/{id}/comment', [CommentController::class, 'store'])->name('comment.store');
     Route::post('/user/{user}/follow', [FollowController::class, 'toggle'])->name('user.follow');
+    Route::resource('recruitment', RecruitmentController::class)->except(['show']);
 });
 
 require __DIR__.'/auth.php';

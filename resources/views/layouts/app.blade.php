@@ -35,13 +35,10 @@
                             <a class="nav-link text-poke-light fw-bold" href="{{ route('pokedex') }}">Pokedex</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-poke-light fw-bold" href="#">Strategy Guides</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link text-poke-light fw-bold" href="{{ route('community.index') }}">Community</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-poke-light fw-bold" href="#">Recruitment</a>
+                            <a class="nav-link text-poke-light fw-bold" href="{{ route('recruitment.index') }}">Recruitment</a>
                         </li>
                     </ul>
 

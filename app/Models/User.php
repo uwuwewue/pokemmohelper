@@ -88,4 +88,9 @@ class User extends Authenticatable
         return $this->following()->where('followed_id', $user->id)->exists();
     }
 
+    public function recruitments()
+    {
+        return $this->hasMany(Recruitment::class);
+    }
+
 }
